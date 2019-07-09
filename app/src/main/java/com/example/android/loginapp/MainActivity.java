@@ -1,5 +1,6 @@
 package com.example.android.loginapp;
 
+import android.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,14 +25,18 @@ public class MainActivity extends AppCompatActivity {
         String userName = et_user.getText().toString().trim();
         String password = et_password.getText().toString().trim();
 
-        if(!isValidPasword(password)) {
-            return;
-        }
+
         if (isValidUser(userName) ) {
-            //call the login API
-            Toast.makeText(this, "You have successfully logged in.",
-                    Toast.LENGTH_SHORT).show();
-        } else {
+            if (isValidPasword(password)) {
+                //call the login API
+                Toast.makeText(this, "You have successfully logged in.",
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Invalid password/MPIN",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {
             Toast.makeText(this, "Invalid phone/email.",
                     Toast.LENGTH_SHORT).show();
         }
@@ -40,12 +45,15 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isValidPasword(String password) {
 
-        if (password.length() == 0) {
-            Toast.makeText(this, "Password cannot be blank.",
-                    Toast.LENGTH_SHORT).show();
-            return false;
+        String phonePattern = "(?=^\\d{4}$)(\\d)+(?!\\1)\\d\\d*";
+
+        if (password.length() == 8) {
+            return true;
         }
-        return true;
+        if(password.matches(phonePattern) && password.length()== 4) {
+            return true;
+        }
+        return false;
     }
 
     private boolean isValidUser(String phone) {
@@ -61,5 +69,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return  false;
     }
-
 }

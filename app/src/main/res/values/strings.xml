@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Login app</string>
+    <string name="header">Log in to your Account</string>
+    <string name="bt_login">LOGIN</string>
+    <string name="bt_fb">LOGIN WITH FACEBOOK</string>
+    <string name="bt_google">LOGIN WITH GOOGLE</string>
+    <string name="forgot">FORGOT PASSWORD/MPIN?</string>
 </resources>
